@@ -25,7 +25,9 @@ export const currentUser = (req: Request, res: Response, next: NextFunction) => 
     }
 
     try {
+        console.log(process.env.JWT_SECRET, "env jwt_secret=====================>")
         const payload = jwt.verify(token, process.env.JWT_SECRET!) as UserPayload;
+        console.log(payload, "payload from current user======================>")
         req.currentUser = payload;
 
     } catch (error) {
