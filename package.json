@@ -1,6 +1,6 @@
 {
   "name": "@be-my-guest/common",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Common middleware and error handling for microservices",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
