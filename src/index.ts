@@ -7,7 +7,7 @@ export * from './errors/NotFoundError';
 export * from './errors/RequestValidationError';
 
 //Re-export files from middlewares
-export * from './middlewares/currentUser';
+// export * from './middlewares/currentUser';
 export * from './middlewares/errorHandler';
 export * from './middlewares/requireAuth';
 export * from './middlewares/validateRequest';
