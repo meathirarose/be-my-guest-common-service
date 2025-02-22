@@ -11,3 +11,8 @@ export * from './errors/RequestValidationError';
 export * from './middlewares/errorHandler';
 export * from './middlewares/requireAuth';
 export * from './middlewares/validateRequest';
+
+// Re-export functions, messages and status codes
+export * from './constants/messages';
+export * from './functions/responseHandler';
+export * from './utils/HttpStatusCode';
