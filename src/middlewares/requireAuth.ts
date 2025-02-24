@@ -29,11 +29,12 @@ export const requireAuth = (
     
         try {
             const payload = jwt.verify(token, "mySuperJWTkeySecret940611") as UserPayload;
+            console.log(payload,"common============================================")
             req.currentUser = payload;
     
         } catch (error) {
-            throw new NotAuthorizedError();
             console.log("JWT verification failed", error);
+            throw new NotAuthorizedError();
         }
     next();
 }
