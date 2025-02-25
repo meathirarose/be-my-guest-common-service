@@ -5,6 +5,8 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+console.log(process.env.ACCESS_SECRET as string, "hello this is ===================================")
+
 interface UserPayload {
     id: string,
     email: string
