@@ -22,19 +22,18 @@ export const requireAuth = (
     next: NextFunction
 ) => {
       const token = req.cookies.accessToken;
-      const secret = "mySuperJWTkeySecret940611"
     
         if(!token){
             return next();
         }
     
         try {
-            const payload = jwt.verify(token, secret) as UserPayload;
+            const payload = jwt.verify(token, "mySuperJWTkeySecret940611") as UserPayload;
             req.currentUser = payload;
     
         } catch (error) {
-            throw new NotAuthorizedError();
             console.log("JWT verification failed", error);
+            throw new NotAuthorizedError();
         }
     next();
 }
