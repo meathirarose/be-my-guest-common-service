@@ -5,8 +5,6 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-console.log(process.env.ACCESS_SECRET, "hello access secret---------------------------------------------------------------------->");
-
 interface UserPayload {
     id: string,
     email: string
@@ -26,13 +24,14 @@ export const requireAuth = (
     next: NextFunction
 ) => {
       const token = req.cookies.accessToken;
+      const secret = process.env.ACCESS_SECRET as string;
     
         if(!token){
             return next();
         }
     
         try {
-            const payload = jwt.verify(token, process.env.ACCESS_SECRET!) as UserPayload;
+            const payload = jwt.verify(token, secret) as UserPayload;
             req.currentUser = payload;
     
         } catch (error) {
