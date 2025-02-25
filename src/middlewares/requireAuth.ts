@@ -1,11 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { NotAuthorizedError } from "../errors/NotAuthorizedError";
 import jwt from 'jsonwebtoken';
-import dotenv from "dotenv";
-
-dotenv.config();
-
-console.log(process.env.ACCESS_SECRET as string, "hello this is ===================================")
 
 interface UserPayload {
     id: string,
@@ -20,13 +15,14 @@ declare global {
     }
 }
 
+
 export const requireAuth = (
     req: Request, 
     res: Response, 
     next: NextFunction
 ) => {
       const token = req.cookies.accessToken;
-      const secret = process.env.ACCESS_SECRET as string;
+      const secret = "mySuperJWTkeySecret940611"
     
         if(!token){
             return next();
@@ -37,8 +33,8 @@ export const requireAuth = (
             req.currentUser = payload;
     
         } catch (error) {
-            console.log("JWT verification failed", error);
             throw new NotAuthorizedError();
+            console.log("JWT verification failed", error);
         }
     next();
 }
