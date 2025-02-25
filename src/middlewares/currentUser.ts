@@ -1,29 +1,36 @@
-// import { Request, Response, NextFunction } from 'express';
-// import jwt from 'jsonwebtoken';
+import { Request, Response, NextFunction } from 'express';
+import jwt from 'jsonwebtoken';
+import dotenv from "dotenv";
 
+dotenv.config();
 
-// declare global {
-//     namespace Express {
-//         interface Request {
-//             currentUser?: UserPayload;
-//         }
-//     }
-// }
+interface UserPayload {
+    id: string,
+    email: string
+}
 
-// export const currentUser = (req: Request, res: Response, next: NextFunction) => {
-//     const token = req.cookies.accessToken;
+declare global {
+    namespace Express {
+        interface Request {
+            currentUser?: UserPayload;
+        }
+    }
+}
 
-//     if(!token){
-//         return next();
-//     }
+export const currentUser = (req: Request, res: Response, next: NextFunction) => {
+    const token = req.cookies.accessToken;
 
-//     try {
-//         const payload = jwt.verify(token, "mySuperJWTkeySecret940611") as UserPayload;
-//         req.currentUser = payload;
+    if(!token){
+        return next();
+    }
 
-//     } catch (error) {
-//         console.log("JWT verification failed", error);
-//     }
+    try {
+        const payload = jwt.verify(token, "mySuperJWTkeySecret940611") as UserPayload;
+        req.currentUser = payload;
 
-//     next();
-// }
+    } catch (error) {
+        console.log("JWT verification failed", error);
+    }
+
+    next();
+}
