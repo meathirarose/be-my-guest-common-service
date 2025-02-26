@@ -18,6 +18,7 @@ declare global {
     }
 }
 
+console.log(process.env.ACCESS_SECRET, "access secret-----------------------------common module")
 
 export const requireAuth = (
     req: Request, 
@@ -26,7 +27,6 @@ export const requireAuth = (
 ) => {
       const token = req.cookies.accessToken;
         console.log(token, "from cookies------------------common module");
-        console.log(process.env.ACCESS_SECRET, "access secret-----------------------------common module")
         if(!token){
             return next();
         }
