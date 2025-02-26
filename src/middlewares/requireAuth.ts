@@ -26,7 +26,6 @@ export const requireAuth = (
 ) => {
       const token = req.cookies.accessToken;
       const secret = process.env.ACCESS_SECRET as string;
-        console.log(process.env.ACCESS_SECRET, "access secret-----------------------------common module")
         if(!token){
             return next();
         }
