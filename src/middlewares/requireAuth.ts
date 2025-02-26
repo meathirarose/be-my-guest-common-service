@@ -1,6 +1,9 @@
 import { Request, Response, NextFunction } from "express";
 import { NotAuthorizedError } from "../errors/NotAuthorizedError";
 import jwt from 'jsonwebtoken';
+import dotenv from "dotenv";
+
+dotenv.config();
 
 interface UserPayload {
     id: string,
@@ -22,7 +25,8 @@ export const requireAuth = (
     next: NextFunction
 ) => {
       const token = req.cookies.accessToken;
-    
+        console.log(token, "from cookies------------------common module");
+        console.log(process.env.ACCESS_SECRET, "access secret-----------------------------common module")
         if(!token){
             return next();
         }
