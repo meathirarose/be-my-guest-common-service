@@ -18,7 +18,6 @@ declare global {
     }
 }
 
-console.log(process.env.ACCESS_SECRET, "access secret-----------------------------common module")
 
 export const requireAuth = (
     req: Request, 
@@ -26,13 +25,14 @@ export const requireAuth = (
     next: NextFunction
 ) => {
       const token = req.cookies.accessToken;
-        console.log(token, "from cookies------------------common module");
+      const secret = process.env.ACCESS_SECRET as string;
+        console.log(process.env.ACCESS_SECRET, "access secret-----------------------------common module")
         if(!token){
             return next();
         }
     
         try {
-            const payload = jwt.verify(token, "mySuperJWTkeySecret940611") as UserPayload;
+            const payload = jwt.verify(token, secret) as UserPayload;
             req.currentUser = payload;
     
         } catch (error) {
