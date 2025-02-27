@@ -32,6 +32,6 @@ export const requireAuth = (
         if (error instanceof CustomError) {
             return next(error);
         }
-        return next(new ForbiddenError());
+        return next(new NotAuthorizedError());
     }
 }
